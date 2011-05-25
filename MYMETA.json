@@ -1,5 +1,5 @@
 {
-   "abstract" : "Manage the \"dfa.command\" database",
+   "abstract" : "A Set of Discrete Finite Automata",
    "author" : [
       "Ron Savage <ron@savage.net.au>"
    ],
@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
    },
-   "name" : "DFA-Command",
+   "name" : "Set-FA",
    "prereqs" : {
       "build" : {
          "requires" : {
@@ -29,16 +29,6 @@
          "requires" : {
             "Hash::FieldHash" : "0.1"
          }
-      }
-   },
-   "provides" : {
-      "DFA::Command" : {
-         "file" : "lib/DFA/Command.pm",
-         "version" : "3.00"
-      },
-      "DFA::Command::Automaton" : {
-         "file" : "lib/DFA/Command/Automaton.pm",
-         "version" : "3.00"
       }
    },
    "release_status" : "stable",

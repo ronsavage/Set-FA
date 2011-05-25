@@ -1,5 +1,5 @@
 ---
-abstract: "Manage the \"dfa.command\" database"
+abstract: 'A Set of Discrete Finite Automata'
 author:
   - 'Ron Savage <ron@savage.net.au>'
 build_requires:
@@ -13,13 +13,13 @@ license: artistic
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
-name: DFA-Command
+name: Set-FA
 provides:
-  DFA::Command:
-    file: lib/DFA/Command.pm
+  Set::FA:
+    file: lib/Set/FA.pm
     version: 3.00
-  DFA::Command::Automaton:
-    file: lib/DFA/Command/Automaton.pm
+  Set::FA::Automaton:
+    file: lib/Set/FA/Element.pm
     version: 3.00
 requires:
   Hash::FieldHash: 0.1
