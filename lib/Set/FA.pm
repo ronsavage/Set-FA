@@ -369,7 +369,7 @@ I've rewritten the documentation from scratch.
 
 =head1 See Also
 
-Before adopting L<Set::FA> (for L<Graph::Easy::Marpa::Lexer>), other DFA modules I looked at were:
+Before adopting L<Set::FA> (for L<Graph::Easy::Marpa>'s lexer), other DFA modules I looked at were:
 
 =over 4
 
