@@ -1,0 +1,21 @@
+Revision history for Perl extension DFA::Command.
+
+1.00  Tue May 24 14:02:00 2011
+	  - Co-maint is now with Ron Savage, who will do all/any future development.
+	  - Rewrite Set::FA::Element to use getters/setters via Hash::FieldHash, rather than direct
+	  	access to the underlying hash.
+	  - Change some parameters to new():
+	  	o accept is now accepting, since accept() is a method.
+		o die_on_loop is a new option.
+		o logger is a log object of some sort. I prefer Log::Handler. Log::Agent is not supported.
+		o start is a new option.
+		o states is not supported. The list of states in the transitions parameter is used instead.
+		o verbose is a new option.
+	  - Rewrite the documentation.
+
+0.101 Fri Mar 22 12:00:00 2002
+	  - Added unified representation for transition rules.
+	  - Rewrote clone() with a recursive deep copy.
+
+0.100 Mon Mar 18 12:00:00 2002
+	  - Initial release.

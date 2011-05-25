@@ -1,0 +1,51 @@
+{
+   "abstract" : "Manage the \"dfa.command\" database",
+   "author" : [
+      "Ron Savage <ron@savage.net.au>"
+   ],
+   "dynamic_config" : 1,
+   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.110580",
+   "license" : [
+      "artistic_1"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "DFA-Command",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Test::More" : "0.94",
+            "Test::Pod" : "1.44"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.38"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Hash::FieldHash" : "0.1"
+         }
+      }
+   },
+   "provides" : {
+      "DFA::Command" : {
+         "file" : "lib/DFA/Command.pm",
+         "version" : "3.00"
+      },
+      "DFA::Command::Automaton" : {
+         "file" : "lib/DFA/Command/Automaton.pm",
+         "version" : "3.00"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "license" : [
+         "http://opensource.org/licenses/artistic-license.php"
+      ]
+   },
+   "version" : "3.00"
+}
