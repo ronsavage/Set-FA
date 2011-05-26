@@ -4,17 +4,14 @@ use parent 'Set::Object';
 use strict;
 use warnings;
 
-our $VERSION = '3.00';
+our $VERSION = '1.00';
 
 # -----------------------------------------------
 
 sub accept
 {
 	my($self, $input) = @_;
-
-	$self -> log(debug => 'Entered accept()');
-
-	my($set) = (ref $self) -> new;
+	my($set)          = (ref $self) -> new;
 
 	for my $automaton ($self -> members)
 	{
@@ -31,8 +28,6 @@ sub advance
 {
 	my($self, $input) = @_;
 
-	$self -> log(debug => 'Entered advance()');
-
 	for my $automaton ($self -> members)
 	{
 		$automaton -> advance($input);
@@ -45,10 +40,7 @@ sub advance
 sub clone
 {
 	my($self) = @_;
-
-	$self -> log(debug => 'Entered clone()');
-
-	my($set) = (ref $self) -> new;
+	my($set)  = (ref $self) -> new;
 
 	for my $automaton ($self -> members)
 	{
@@ -64,10 +56,7 @@ sub clone
 sub final
 {
 	my($self) = @_;
-
-	$self -> log(debug => 'Entered final()');
-
-	my($set) = (ref $self) -> new;
+	my($set)  = (ref $self) -> new;
 
 	for my $automaton ($self -> members)
 	{
@@ -83,10 +72,7 @@ sub final
 sub id
 {
 	my($self, $id) = @_;
-
-	$self -> log(debug => 'Entered id()');
-
-	my($set) = (ref $self) -> new;
+	my($set)       = (ref $self) -> new;
 
 	for my $automaton ($self -> members)
 	{
@@ -102,10 +88,7 @@ sub id
 sub in_state
 {
 	my($self, $state) = @_;
-
-	$self -> log(debug => 'Entered in_state()');
-
-	my($set) = (ref $self) -> new;
+	my($set)          = (ref $self) -> new;
 
 	for my $automaton ($self -> members)
 	{
@@ -118,32 +101,9 @@ sub in_state
 
 # -----------------------------------------------
 
-sub log
-{
-	my($self, $level, $message) = @_;
-	$message ||= '';
-
-	$self -> logger ? $self -> logger($level => $message) : $level eq 'error' ? die $message : $self -> verbose ? print "$level: $message\n" : '';
-
-} # End of log.
-
-# -----------------------------------------------
-
-sub logger
-{
-	my($self) = @_;
-
-	return '';
-
-} # End of logger.
-
-# -----------------------------------------------
-
 sub reset
 {
 	my($self) = @_;
-
-	$self -> log(debug => 'Entered reset()');
 
 	for my $automaton ($self -> members)
 	{
@@ -158,24 +118,12 @@ sub step
 {
 	my($self, $input) = @_;
 
-	$self -> log(debug => 'Entered step()');
-
 	for my $automaton ($self -> members)
 	{
 		$automaton -> step($input);
 	}
 
 } # End of step.
-
-# -----------------------------------------------
-
-sub verbose
-{
-	my($self) = @_;
-
-	return 0;
-
-} # End of verbose.
 
 # -----------------------------------------------
 
