@@ -14,8 +14,19 @@ meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
 name: Set-FA
+provides:
+  Set::FA:
+    file: lib/Set/FA.pm
+    version: 1.00
+  Set::FA::Element:
+    file: lib/Set/FA/Element.pm
+    version: 1.00
 requires:
+  Capture::Tiny: 0.1
   Hash::FieldHash: 0.1
+  Set::Object: 1.28
+  attributes: 0.12
+  parent: 0.224
 resources:
   license: http://opensource.org/licenses/artistic-license.php
-version: 3.00
+version: 1.00
