@@ -24,7 +24,11 @@ WriteMakefile
  PL_FILES  => {},
  PREREQ_PM =>
  {
+	 attributes      => 0.12,
+	 Capture::Tiny   => 0.10, # For testing.
 	 Hash::FieldHash => 0.10,
+	 parent          => 0.224,
+	 Set::Object     => 1.28,
 	 Test::More      => 0.94,
 	 Test::Pod       => 1.44,
  },

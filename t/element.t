@@ -2,9 +2,9 @@ use Test::More tests => 42;
 
 # --------------------------------------
 
-BEGIN{ use_ok('DFA::Command::Automaton'); }
+BEGIN{ use_ok('Set::FA::Element'); }
 
-my($dfa) = DFA::Command::Automaton -> new
+my($dfa) = Set::FA::Element -> new
 (
  accepting   => ['baz'],
  start       => 'foo',
@@ -20,7 +20,7 @@ my($dfa) = DFA::Command::Automaton -> new
  verbose => 0,
 );
 
-ok($dfa -> isa('DFA::Command::Automaton') == 1, 'Object isa DFA::Command::Automaton');
+ok($dfa -> isa('Set::FA::Element') == 1, 'Object isa Set::FA::Element');
 ok($dfa -> state('bar') == 1, 'State is bar');
 ok(! $dfa -> state('new') == 1, 'State is not new');
 ok($dfa -> final('baz') == 1, 'baz is an acceptor');
@@ -60,7 +60,7 @@ ok($dfa -> advance('acacbcaaba') eq 'baz', 'advance(acacbcaaba) leads to state b
 
 my($entry_count) = 0;
 my($exit_count)  = 0;
-$dfa             = DFA::Command::Automaton -> new
+$dfa             = Set::FA::Element -> new
 (
  accepting => ['baz'],
  actions   =>

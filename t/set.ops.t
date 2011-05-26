@@ -2,11 +2,11 @@ use Test::More tests => 45;
 
 # --------------------------------------
 
-BEGIN{ use_ok('DFA::Command'); use_ok('DFA::Command::Automaton'); }
+BEGIN{ use_ok('Set::FA'); use_ok('Set::FA::Element'); }
 
 my(@a) = map
 {
-    DFA::Command::Automaton -> new
+    Set::FA::Element -> new
 		(
 		 accepting   => ['ping'],
 		 id          => "a.$_",
@@ -23,7 +23,7 @@ my(@a) = map
 
 my(@b) = map
 {
-    DFA::Command::Automaton -> new
+    Set::FA::Element -> new
 		(
 		 accepting   => ['pong'],
 		 id          => "b.$_",
@@ -40,7 +40,7 @@ my(@b) = map
 
 my(@c) = map
 {
-    DFA::Command::Automaton -> new
+    Set::FA::Element -> new
 		(
         accepting   => ['happy'],
         id          => "c.$_",
@@ -56,7 +56,7 @@ my(@c) = map
 
 my($set);
 
-ok(defined($set = DFA::Command -> new(@a, @b) ) == 1, 'Set defined');
+ok(defined($set = Set::FA -> new(@a, @b) ) == 1, 'Set defined');
 ok($set -> includes(@a, @b, @c) == 0, 'Set does not include a/b/c');
 
 ok($set -> insert(@c) == 7, 'Inserted c into set');
@@ -76,7 +76,7 @@ ok($set -> size == 0, 'Cleared set');
 
 $set -> insert(@a, @b, @c);
 
-my($sub) = DFA::Command -> new(@a, @c);
+my($sub) = Set::FA -> new(@a, @c);
 
 my($bizzaro_set);
 

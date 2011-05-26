@@ -2,11 +2,11 @@ use Test::More tests => 22;
 
 # --------------------------------------
 
-BEGIN{ use_ok('DFA::Command'); use_ok('DFA::Command::Automaton'); }
+BEGIN{ use_ok('Set::FA'); use_ok('Set::FA::Element'); }
 
 my(@a) = map
 {
-    DFA::Command::Automaton -> new
+    Set::FA::Element -> new
 		(
 		 accepting   => ['ping'],
 		 id          => "a.$_",
@@ -23,7 +23,7 @@ my(@a) = map
 
 my(@b) = map
 {
-    DFA::Command::Automaton -> new
+    Set::FA::Element -> new
 		(
 		 accepting   => ['pong'],
 		 id          => "b.$_",
@@ -40,7 +40,7 @@ my(@b) = map
 
 my(@c) = map
 {
-    DFA::Command::Automaton -> new
+    Set::FA::Element -> new
 		(
         accepting   => ['happy'],
         id          => "c.$_",
@@ -54,7 +54,7 @@ my(@c) = map
 		)
 } (0 .. 6);
 
-my($set) = DFA::Command -> new(@a, @b, @c);
+my($set) = Set::FA -> new(@a, @b, @c);
 
 my($sub_a) = $set -> accept('abbba');
 my($sub_b) = $set -> final;

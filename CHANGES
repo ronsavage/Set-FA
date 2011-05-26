@@ -29,6 +29,8 @@ Revision history for Perl extension DFA::Command.
 	  - Set::FA got a fresh paint job, too, but since it's parent is Set::Object, Hash::FieldHash was not
 	  	used.
 	  - Rewrite the documentation.
+	  - Add Build.PL.
+	  - Clean up Makefile.PL.
 
 0.101 Fri Mar 22 12:00:00 2002
 	  - Added unified representation for transition rules.

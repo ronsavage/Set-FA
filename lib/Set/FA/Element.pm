@@ -1,4 +1,4 @@
-package Set::FA::Automaton;
+package Set::FA::Element;
 
 use strict;
 use warnings;
@@ -299,6 +299,7 @@ sub report
 
 	my($stt) = $self -> stt;
 
+	my($rule);
 	my($s);
 
 	for my $state (sort keys %$stt)
@@ -315,7 +316,24 @@ sub report
 			$s .= '. This is an accepting state';
 		}
 
+		if ($$stt{$state}{entry})
+		{
+			$s .= ". Entry fn: $$stt{$state}{entry}";
+		}
+
+		if ($$stt{$state}{exit})
+		{
+			$s .= ". Exit fn: $$stt{$state}{exit}";
+		}
+
+		$s .= '. Rules:';
+
 		$self -> log(debug => $s);
+
+		for $rule (@{$$stt{$state}{rule} })
+		{
+			$self -> log(debug => $$rule[2]);
+		}
 	}
 
 } # End of report.
@@ -999,6 +1017,20 @@ If they match, returns 0 immediately.
 =item o Calls the entry function, if any, of the new 'current' state
 
 =item o Returns 1.
+
+=back
+
+=head2 validate()
+
+Perform validation checks on these parameters to new():
+
+=over 4
+
+=item o accepting
+
+=item o start
+
+=item o transitions
 
 =back
 
