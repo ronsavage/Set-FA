@@ -284,9 +284,8 @@ sub new
 {
 	my($class, %arg) = @_;
 	my($self)        = bless {}, $class;
-	$self            = $self -> _init(\%arg);
 
-	return $self;
+	return $self -> _init(\%arg);
 
 }	# End of new.
 
