@@ -48,7 +48,7 @@ sub advance
 
 		if (length($output) >= length($input) )
 		{
-			my($prefix) = '<', join('> <' . map{sprintf('%02x', $_)} split(//, substr($input, 0, 5) ) ) . '>';
+			my($prefix) = '<', join('> <' . map{sprintf '%02x', ord $_} split(//, substr($input, 0, 5) ) ) . '>';
 
 			$self -> log( ($self -> die_on_loop ? 'error' : 'warning') => "State: '" . $self -> current . "' is not consuming input. Next 5 chars: $prefix");
 		}
