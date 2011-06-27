@@ -309,13 +309,14 @@ sub log
 	$level   ||= 'debug';
 	$message ||= '';
 
+	if ($level eq 'error')
+	{
+		die $message;
+	}
+
 	if ($self -> logger)
 	{
 		$self -> logger -> $level($message);
-	}
-	elsif ($level eq 'error')
-	{
-		die $message;
 	}
 	elsif ($self -> verbose)
 	{
