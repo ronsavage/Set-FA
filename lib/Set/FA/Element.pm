@@ -50,6 +50,7 @@ sub advance
 		{
 			my($prefix) = '<', join('> <' . map{sprintf '%02x', ord $_} split(//, substr($input, 0, 5) ) ) . '>';
 
+			$self -> log(debug => "Input: <$input>");
 			$self -> log( ($self -> die_on_loop ? 'error' : 'warning') => "State: '" . $self -> current . "' is not consuming input. Next 5 chars: $prefix");
 		}
 
