@@ -48,7 +48,7 @@ sub advance
 
 		if (length($output) >= length($input) )
 		{
-			my($prefix) = $input ? '<' . join('> <' . map{sprintf '%02x', ord $_} grep{/./} split(//, substr($input, 0, 5) ) ) . '>' : '';
+			my($prefix) = $input ? '<' . join('> <', map{$_ ge ' ' && $_ le '~' ? sprintf('%s', $_) : sprintf('0x%02x', ord $_)} grep{/./} split(//, substr($input, 0, 5) ) ) . '>' : '';
 
 			$self -> log( ($self -> die_on_loop ? 'error' : 'warning') => "State: '" . $self -> current . "' is not consuming input. Next 5 chars: $prefix");
 		}
