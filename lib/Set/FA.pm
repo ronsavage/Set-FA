@@ -338,7 +338,7 @@ as L<Set::FA::Element> are already available.
 
 Uses a very old-fashioned style of writing Perl.
 
-=item o FLAT::DSA. See L<FLAT>
+=item o FLAT::DFA. See L<FLAT>
 
 A toolkit for manipulating DFAs.
 
