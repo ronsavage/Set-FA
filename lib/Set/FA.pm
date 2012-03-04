@@ -133,7 +133,7 @@ sub step
 
 =head1 NAME
 
-L<Set::FA> - A Set of Discrete Finite Automata
+Set::FA - A Set of Discrete Finite Automata
 
 =head1 Synopsis
 
