@@ -21,7 +21,7 @@ WriteMakefile
  },
  DISTNAME  => 'Set-FA',
  NAME      => 'Set::FA',
-	LICENSE   => 'perl_5',
+	LICENSE   => 'artistic_2',
  PL_FILES  => {},
  PREREQ_PM =>
  {
