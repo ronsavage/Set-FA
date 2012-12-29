@@ -3,7 +3,7 @@ use Module::Build;
 Module::Build -> new
 (
  module_name    => 'Set::FA',
- license        => 'artistic',
+ license        => 'perl_5',
  dist_abstract  => 'A Set of Discrete Finite Automata',
  dist_author    => 'Ron Savage <ron@savage.net.au>',
  build_requires =>
