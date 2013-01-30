@@ -30,7 +30,7 @@ WriteMakefile
 	 Hash::FieldHash => 0.10,
 	 parent          => 0.224,
 	 Set::Object     => 1.28,
-	 Test::Simple    => 0.98,
+	 Test::More    => 0.98,
 	 Test::Pod       => 1.45,
  },
  VERSION_FROM => 'lib/Set/FA.pm',
