@@ -31,7 +31,7 @@ WriteMakefile
 	 parent          => 0.224,
 	 Set::Object     => 1.28,
 	 Test::More    => 0.98,
-	 Test::Pod       => 1.45,
+#	 Test::Pod       => 1.45, # Make it optional. See t/pod.t
  },
  VERSION_FROM => 'lib/Set/FA.pm',
 );
