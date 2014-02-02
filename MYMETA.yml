@@ -3,12 +3,11 @@ abstract: 'A Set of Discrete Finite Automata'
 author:
   - 'Ron Savage <ron@savage.net.au>'
 build_requires:
-  Test::More: 0.94
-  Test::Pod: 1.44
+  Test::More: 0.98
 configure_requires:
   Module::Build: 0.38
 dynamic_config: 0
-generated_by: 'Module::Build version 0.4003, CPAN::Meta::Converter version 2.120630'
+generated_by: 'Module::Build version 0.4204, CPAN::Meta::Converter version 2.120921'
 license: artistic
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -25,8 +24,10 @@ requires:
   Capture::Tiny: 0.1
   Hash::FieldHash: 0.1
   Set::Object: 1.28
-  attributes: 0.12
-  parent: 0.224
+  attributes: 0
+  parent: 0
+  strict: 0
+  warnings: 0
 resources:
   license: http://www.perlfoundation.org/artistic_license_1_0
 version: 1.08
