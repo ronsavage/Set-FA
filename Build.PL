@@ -11,21 +11,21 @@ Module::Build -> new
 	dist_author    => 'Ron Savage <ron@savage.net.au>',
 	build_requires =>
 	{
-		'Test::More' => 0.98,
-#		'Test::Pod'  => 1.45, # Make it optional. See t/pod.t
+		'Test::More' => 1.001014,
+		'Test::Pod' => 1.48,
 	},
 	configure_requires =>
 	{
-		 'Module::Build' => 0.3800,
+		'Module::Build' => 0.4211,
 	},
 	requires =>
 	{
-		'attributes'      => 0,
-		'Capture::Tiny'   => 0.10, # For testing.
+		'attributes' => 0,
+		'Capture::Tiny' => 0.10,
 		'Hash::FieldHash' => 0.10,
-		'parent'          => 0,
-		'Set::Object'     => 1.28,
-		'strict'          => 0,
-		'warnings'        => 0,
+		'parent' => 0,
+		'Set::Object' => 1.28,
+		'strict' => 0,
+		'warnings' => 0,
 	},
 ) -> create_build_script();

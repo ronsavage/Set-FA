@@ -1,6 +1,6 @@
 Build.PL
 Changelog.ini
-CHANGES
+Changes
 lib/Set/FA.pm
 lib/Set/FA/Element.pm
 Makefile.PL

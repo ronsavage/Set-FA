@@ -299,7 +299,7 @@ Returns nothing.
 
 =head1 Machine-Readable Change Log
 
-The file CHANGES was converted into Changelog.ini by L<Module::Metadata::Changes>.
+The file Changes was converted into Changelog.ini by L<Module::Metadata::Changes>.
 
 =head1 Version Numbers
 

@@ -1,5 +1,8 @@
 Revision history for Perl extension Set::FA.
 
+9.99  Sat Feb 21 11:23:00 2015
+	- Rename CHANGES to Changes as per CPAN::Spec::Changes
+
 1.08  Sun Jul 17 12:40:00 2011
 	  - Document the Set::FA::Element::report() method. Patch t/report.t to match.
 
