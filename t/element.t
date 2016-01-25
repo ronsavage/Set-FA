@@ -1,8 +1,11 @@
-use Test::More tests => 42;
+use strict;
+use warnings;
+
+use Set::FA::Element;
+
+use Test::Stream -V1;
 
 # --------------------------------------
-
-BEGIN{ use_ok('Set::FA::Element'); }
 
 my($dfa) = Set::FA::Element -> new
 (
@@ -106,3 +109,4 @@ ok($dfa -> accept('ababababc') == 1, 'accept(ababababc) leads to an acceptor');
 ok($entry_count == 9, 'entry_count is 9');
 ok($exit_count == 9, 'exit_count is 9');
 
+done_testing;

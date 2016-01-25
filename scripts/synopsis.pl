@@ -1,11 +1,9 @@
+#!/usr/bin/env perl
+
 use strict;
 use warnings;
 
-use Capture::Tiny 'capture';
-
 use Set::FA::Element;
-
-use Test::Stream -V1;
 
 # --------------------------------------
 
@@ -25,7 +23,9 @@ my($dfa) = Set::FA::Element -> new
 	],
 );
 
-my($expect) = <<EOS;
+$dfa -> report;
+
+__END__
 Entered report()
 State Transition Table
 State: bar
@@ -40,11 +40,3 @@ State: foo. This is the start state
 Rule => Next state
 /b/ => bar
 /./ => foo
-EOS
-my(@expect)          = split(/\n/, $expect);
-my($stdout, $stderr) = capture{$dfa -> report};
-my(@output)          = split(/\n/, $stdout);
-
-ok($output[5] eq $expect[5], 'Reports as expected');
-
-done_testing;

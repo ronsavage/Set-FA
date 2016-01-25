@@ -1,8 +1,13 @@
-use Test::More tests => 45;
+use strict;
+use warnings;
+
+use Set::FA;
+use Set::FA::Element;
+
+use Test::Stream -V1;
 
 # --------------------------------------
 
-BEGIN{ use_ok('Set::FA'); use_ok('Set::FA::Element'); }
 
 my(@a) = map
 {
@@ -120,4 +125,4 @@ ok($set > $sub == 1, , 'Set is a proper superset of sub');
 ok( ($sub > $set) == 0, 'Sub is a not a proper superset of set');
 ok( ($set > $set) == 0, 'Set is a not a proper superset of itself');
 
-
+done_testing;

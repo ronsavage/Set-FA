@@ -3,22 +3,144 @@ package Set::FA::Element;
 use strict;
 use warnings;
 
-use Hash::FieldHash ':all';
+use Log::Handler;
 
-fieldhash my %accepting   => 'accepting';
-fieldhash my %actions     => 'actions';
-fieldhash my %current     => 'current';
-fieldhash my %data        => 'data';
-fieldhash my %die_on_loop => 'die_on_loop';
-fieldhash my %id          => 'id';
-fieldhash my %logger      => 'logger';
-fieldhash my %match       => 'match';
-fieldhash my %start       => 'start';
-fieldhash my %stt         => 'stt';
-fieldhash my %transitions => 'transitions';
-fieldhash my %verbose     => 'verbose';
+use Moo;
 
-our $VERSION = '1.08';
+use Types::Standard qw/Any ArrayRef Bool HashRef Str/;
+
+has accepting =>
+(
+	default  => sub{return []},
+	is       => 'rw',
+	isa      => ArrayRef,
+	required => 0,
+);
+
+has actions =>
+(
+	default  => sub{return {} },
+	is       => 'rw',
+	isa      => HashRef,
+	required => 0,
+);
+
+has current => # Internal.
+(
+	default  => sub{return ''},
+	is       => 'rw',
+	isa      => Str,
+	required => 0,
+);
+
+has data =>
+(
+	default  => sub{return ''},
+	is       => 'rw',
+	isa      => Str,
+	required => 0,
+);
+
+has die_on_loop =>
+(
+	default  => sub{return 0},
+	is       => 'rw',
+	isa      => Bool,
+	required => 0,
+);
+
+has id =>
+(
+	default  => sub{return ''},
+	is       => 'rw',
+	isa      => Str,
+	required => 0,
+);
+
+has logger =>
+(
+	default  => sub{return undef},
+	is       => 'rw',
+	isa      => Any,
+	required => 0,
+);
+
+has match => # Internal.
+(
+	default  => sub{return ''},
+	is       => 'rw',
+	isa      => Str,
+	required => 0,
+);
+
+has maxlevel =>
+(
+	default  => sub{return 'notice'},
+	is       => 'rw',
+	isa      => Str,
+	required => 0,
+);
+
+has minlevel =>
+(
+	default  => sub{return 'error'},
+	is       => 'rw',
+	isa      => Str,
+	required => 0,
+);
+
+has start =>
+(
+	default  => sub{return ''},
+	is       => 'rw',
+	isa      => Str,
+	required => 0,
+);
+
+has stt => # Internal.
+(
+	default  => sub{return {} },
+	is       => 'rw',
+	isa      => HashRef,
+	required => 0,
+);
+
+has transitions =>
+(
+	default  => sub{return []},
+	is       => 'rw',
+	isa      => ArrayRef,
+	required => 0,
+);
+
+our $VERSION = '2.00';
+
+# -----------------------------------------------
+
+sub BUILD
+{
+	my($self) = @_;
+
+	if (! defined $self -> logger)
+	{
+		$self -> logger(Log::Handler -> new);
+		$self -> logger -> add
+		(
+			screen =>
+			{
+				maxlevel       => $self -> maxlevel,
+				message_layout => '%m',
+				minlevel       => $self -> minlevel,
+				utf8           => 1,
+			}
+		);
+	}
+
+	$self -> validate_params;
+	$self -> build_stt;
+	$self -> current($self -> start);
+
+} # End of BUILD.
 
 # -----------------------------------------------
 
@@ -276,69 +398,15 @@ sub final
 
 } # End of final.
 
-# -----------------------------------------------
-
-sub _init
-{
-	my($self, $arg)    = @_;
-	$$arg{accepting}   ||= []; # Caller can set.
-	$$arg{actions}     ||= {}; # Caller can set.
-	$$arg{current}     = '';
-	$$arg{data}        ||= ''; # Caller can set.
-	$$arg{die_on_loop} ||= 0;  # Caller can set.
-	$$arg{id}          ||= 0;  # Caller can set.
-	$$arg{logger}      ||= ''; # Caller can set.
-	$$arg{match}       = '';
-	$$arg{start}       ||= ''; # Caller must set.
-	$$arg{stt}         = {};
-	$$arg{transitions} ||= []; # Caller must set.
-	$$arg{verbose}     ||= 0;  # Caller can set.
-	$self              = from_hash($self, $arg);
-
-	$self -> validate_params;
-	$self -> build_stt;
-	$self -> current($self -> start);
-
-	return $self;
-
-} # End of _init.
-
-# -----------------------------------------------
+# --------------------------------------------------
 
 sub log
 {
-	my($self, $level, $message) = @_;
-	$level   ||= 'debug';
-	$message ||= '';
+	my($self, $level, $s) = @_;
 
-	if ($level eq 'error')
-	{
-		die $message;
-	}
-
-	if ($self -> logger)
-	{
-		$self -> logger -> $level($message);
-	}
-	elsif ($self -> verbose)
-	{
-		print "$level: $message\n";
-	}
-
-	return $self;
+	$self -> logger -> log($level => $s) if ($self -> logger);
 
 } # End of log.
-
-# -----------------------------------------------
-
-sub new
-{
-	my($class, %arg) = @_;
-	my($self)        = bless {}, $class;
-
-	return $self -> _init(\%arg);
-
-}	# End of new.
 
 # -----------------------------------------------
 
@@ -396,8 +464,9 @@ sub reset
 	my($self) = @_;
 
 	$self -> log(debug => 'Entered reset()');
+	$self -> current($self -> start);
 
-	return $self -> current($self -> start) -> current;
+	return $self -> current;
 
 } # End of reset.
 
@@ -433,7 +502,7 @@ sub step
 	{
 		($rule_sub, $next, $rule) = @$item;
 		($match, $output)         = $rule_sub -> ($self, $input);
- 
+
 		if (defined $match)
 		{
 			$self -> match($match);
@@ -515,29 +584,33 @@ L<Set::FA::Element> - Discrete Finite Automaton
 =head1 Synopsis
 
 	#!/usr/bin/perl
-	
+
 	use strict;
 	use warnings;
-	
+
 	use Set::FA::Element;
-	
+
 	# --------------------------
-	
+
 	my($dfa) = Set::FA::Element -> new
 	(
-	 accepting   => ['baz'],
-	 start       => 'foo',
-	 transitions =>
-	 [
-	  ['foo', 'b', 'bar'],
-	  ['foo', '.', 'foo'],
-	  ['bar', 'a', 'foo'],
-	  ['bar', 'b', 'bar'],
-	  ['bar', 'c', 'baz'],
-	  ['baz', '.', 'baz'],
-	 ],
+		accepting   => ['baz'],
+		start       => 'foo',
+		transitions =>
+		[
+			['foo', 'b', 'bar'],
+			['foo', '.', 'foo'],
+			['bar', 'a', 'foo'],
+			['bar', 'b', 'bar'],
+			['bar', 'c', 'baz'],
+			['baz', '.', 'baz'],
+		],
 	);
-	
+
+	print $dfa -> report;
+
+	Or:
+
 	my($boolean)  = $dfa -> accept($input);
 	my($current)  = $dfa -> advance($input);
 	my($state)    = $dfa -> current;
@@ -549,6 +622,8 @@ L<Set::FA::Element> - Discrete Finite Automaton
 	my($boolean)  = $dfa -> state($state);
 	my($string)   = $dfa -> step($input);
 	my($boolean)  = $dfa -> step_state($next);
+
+See scripts/synopsis.pl.
 
 =head1 Description
 

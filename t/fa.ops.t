@@ -1,8 +1,12 @@
-use Test::More tests => 22;
+use strict;
+use warnings;
+
+use Set::FA;
+use Set::FA::Element;
+
+use Test::Stream -V1;
 
 # --------------------------------------
-
-BEGIN{ use_ok('Set::FA'); use_ok('Set::FA::Element'); }
 
 my(@a) = map
 {
@@ -94,4 +98,4 @@ ok($set -> in_state('happy') -> size == 0, 'Set is not in state happy');
 ok($set -> final -> size == @a, 'Set a final sizes match');
 ok($set -> final -> includes(@a) == 1, 'Set final includes a');
 
-
+done_testing;

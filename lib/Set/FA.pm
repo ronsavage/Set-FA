@@ -4,7 +4,7 @@ use parent 'Set::Object';
 use strict;
 use warnings;
 
-our $VERSION = '1.08';
+our $VERSION = '2.00';
 
 # -----------------------------------------------
 
@@ -138,15 +138,15 @@ Set::FA - A Set of Discrete Finite Automata
 =head1 Synopsis
 
 	#!/usr/bin/perl
-	
+
 	use strict;
 	use warnings;
-	
+
 	use Set::FA;
 	use Set::FA::Element;
-	
+
 	# --------------------------
-	
+
 	my(@a) = map
 	{
 		Set::FA::Element -> new
@@ -163,7 +163,7 @@ Set::FA - A Set of Discrete Finite Automata
 		 ],
 		)
 	} (0 .. 2);
-	
+
 	my(@b) = map
 	{
 		Set::FA::Element -> new
