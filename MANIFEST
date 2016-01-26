@@ -8,6 +8,9 @@ MANIFEST			This list of files
 META.json
 META.yml
 README
+scripts/pod2html.sh
+scripts/synopsis.1.pl
+scripts/synopsis.2.pl
 scripts/synopsis.pl
 t/element.t
 t/fa.ops.t

@@ -21,13 +21,14 @@ provides:
     file: lib/Set/FA/Element.pm
     version: '1.08'
 requires:
-  Capture::Tiny: '0.1'
-  Hash::FieldHash: '0.1'
-  Set::Object: '1.28'
+  Capture::Tiny: '0.3'
+  Log::Handler: '0.84'
+  Moo: '2.000002'
+  Set::Object: '1.35'
   Test::More: '1.001014'
   Test::Pod: '1.48'
-  attributes: '0.12'
-  parent: '0.224'
+  Test::Stream: '1.302026'
+  parent: '0.234'
   strict: '0'
   warnings: '0'
 resources:
