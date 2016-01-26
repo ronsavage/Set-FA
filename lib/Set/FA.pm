@@ -301,7 +301,7 @@ Returns nothing.
 
 =head1 FAQ
 
-See <Set::FA::Element/FAQ>.
+See L<Set::FA::Element/FAQ>.
 
 =head1 Machine-Readable Change Log
 
@@ -316,14 +316,15 @@ Version numbers < 1.00 represent development versions. From 1.00 up, they are pr
 The code was rewritten to perform exactly as did earlier versions (pre-1.00) of L<Set::FA> and
 L<Set::FA::Element>, and hence is essentially the same, line for line.
 
-I've reformatted it, and changed the OO nature and the logging, obviously, but Mark Rogaski, the author of
-L<Set::FA> gets the credit for the code.
+I've reformatted it, and changed the OO nature and the logging, obviously, but Mark Rogaski, the
+author of L<Set::FA> gets the credit for the code.
 
 I've rewritten the documentation from scratch.
 
 =head1 See Also
 
-Before adopting L<Set::FA> (for L<Graph::Easy::Marpa>'s lexer), other DFA modules I looked at were:
+Before adopting L<Set::FA> (for L<Graph::Easy::Marpa>'s lexer), here are some other DFA modules I
+found on L<https://metacpan.org>:
 
 =over 4
 
@@ -340,6 +341,12 @@ and can output in a range of languages. See L<http://smc.sourceforge.net/>.
 SMC looks sophisticated, but it's a rather indirect way of doing things when Perl modules such
 as L<Set::FA::Element> are already available.
 
+=item o L<Dict::FSA>
+
+This module is a perl wrapper around C<fsa>, a set of tools based on finite state automata.
+
+See L<http://www.eti.pg.gda.pl/~jandac/fsa.html>.
+
 =item o L<DMA::FSM>
 
 Uses a very old-fashioned style of writing Perl.
@@ -347,6 +354,14 @@ Uses a very old-fashioned style of writing Perl.
 =item o FLAT::DFA. See L<FLAT>
 
 A toolkit for manipulating DFAs.
+
+=item o L<FSA::Engine>
+
+A Moose Role to convert an object into a Finite State Machine.
+
+=item o L<FSA::Rules>
+
+Build simple rules-based state machines in Perl.
 
 =item o L<IDS::Algorithm::DFA>
 
@@ -383,13 +398,13 @@ L<https://github.com/ronsavage/Set-FA>
 
 Email the author, or log a bug on RT:
 
-L<https://rt.cpan.org/Public/Dist/Display.html?Name=Set::FA>.
+L<https://rt.cpan.org/Public/Dist/Display.html?Name=Set::FA>
 
 =head1 Author
 
 L<Set::FA> was written by Mark Rogaski and Ron Savage I<E<lt>ron@savage.net.auE<gt>> in 2011.
 
-Home page: L<http://savage.net.au/index.html>.
+My homepage: L<http://savage.net.au/index.html>
 
 =head1 Copyright
 
