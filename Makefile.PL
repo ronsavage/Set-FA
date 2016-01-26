@@ -8,7 +8,7 @@ use ExtUtils::MakeMaker;
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
 
-WriteMakefile
+my(%params) =
 (
 	($] ge '5.005') ?
 	(
@@ -30,15 +30,45 @@ WriteMakefile
 	PL_FILES  => {},
 	PREREQ_PM =>
 	{
-		'attributes' => 0.12,
-		'Capture::Tiny' => 0.10,
-		'Hash::FieldHash' => 0.10,
-		'parent' => 0.224,
-		'Set::Object' => 1.28,
-		'strict' => 0,
-		'Test::More' => 1.001014,
-		'Test::Pod' => 1.48,
-		'warnings' => 0,
+		'Capture::Tiny'	=> 0.30,
+		'Log::Handler'	=> 0.84,
+		'Moo'			=> 2.000002,
+		'parent'		=> 0.234,
+		'Set::Object'	=> 1.35,
+		'strict'		=> 0,
+		'Test::More'	=> 1.001014,
+		'Test::Pod'		=> 1.48,
+		'Test::Stream'	=> 1.302026,
+		'warnings'		=> 0,
 	},
 	VERSION_FROM => 'lib/Set/FA.pm',
 );
+
+if ( ($ExtUtils::MakeMaker::VERSION =~ /^\d\.\d\d$/) && ($ExtUtils::MakeMaker::VERSION > 6.30) )
+{
+	$params{LICENSE} = 'artistic_2';
+}
+
+if ($ExtUtils::MakeMaker::VERSION ge '6.46')
+{
+	$params{META_MERGE} =
+	{
+		'meta-spec' =>
+		{
+		'version' => 2,
+		},
+		resources   =>
+		{
+			'bugtracker' => 'https://rt.cpan.org/Public/Dist/Display.html?Name=Set-FA',
+			'license' => 'http://opensource.org/licenses/Artistic-2.0',
+			repository =>
+			{
+				'type' => 'git',
+				'url' => 'https://github.com/ronsavage/Set-FA.git',
+				'web' => 'https://github.com/ronsavage/Set-FA',
+			},
+		},
+	};
+}
+
+WriteMakefile(%params);

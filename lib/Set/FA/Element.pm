@@ -583,7 +583,9 @@ L<Set::FA::Element> - Discrete Finite Automaton
 
 =head1 Synopsis
 
-	#!/usr/bin/perl
+This is scripts/synopsis.2.pl (a test-free version of t/report.t):
+
+	#!/usr/bin/env perl
 
 	use strict;
 	use warnings;
@@ -594,9 +596,10 @@ L<Set::FA::Element> - Discrete Finite Automaton
 
 	my($dfa) = Set::FA::Element -> new
 	(
-		accepting   => ['baz'],
-		start       => 'foo',
-		transitions =>
+		accepting	=> ['baz'],
+		maxlevel	=> 'debug',
+		start		=> 'foo',
+		transitions	=>
 		[
 			['foo', 'b', 'bar'],
 			['foo', '.', 'foo'],
@@ -607,9 +610,27 @@ L<Set::FA::Element> - Discrete Finite Automaton
 		],
 	);
 
-	print $dfa -> report;
+	print "Got: \n";
+	$dfa -> report;
 
-	Or:
+	print "Expected: \n", <<EOS;
+	Entered report()
+	State Transition Table
+	State: bar
+	Rule => Next state
+	/a/ => foo
+	/b/ => bar
+	/c/ => baz
+	State: baz. This is an accepting state
+	Rule => Next state
+	/./ => baz
+	State: foo. This is the start state
+	Rule => Next state
+	/b/ => bar
+	/./ => foo
+	EOS
+
+	Or make use of:
 
 	my($boolean)  = $dfa -> accept($input);
 	my($current)  = $dfa -> advance($input);
@@ -622,8 +643,6 @@ L<Set::FA::Element> - Discrete Finite Automaton
 	my($boolean)  = $dfa -> state($state);
 	my($string)   = $dfa -> step($input);
 	my($boolean)  = $dfa -> step_state($next);
-
-See scripts/synopsis.pl.
 
 =head1 Description
 
@@ -1187,7 +1206,43 @@ Perform validation checks on these parameters to new():
 
 =head1 FAQ
 
-=head2 What's changed in V 1.00 of L<Set::FA::Element>?
+=head2 How do I protect the code from dying?
+
+Use L<Capture::Tiny>. See t/report.t for a simple example.
+
+=head2 What's changed in V 2.00 of C<Set::FA::Element>?
+
+=over 4
+
+=item o Put the distro on github
+
+See L</Repository> below.
+
+=item o Switch from Hash::FieldHash to Moo
+
+=item o This means method chaining is no longer supported
+
+=item o Explicitly default the logger to an instance of L<Log::Handler>
+
+=item o Add maxlevel() and minlevel() for controlling the logger
+
+=item o Rewrite log so messages do not have the prefix of "$level: "
+
+=item o Make the synopses in both modules into stand-alone scripts
+
+See scripts/synopsis.*.pl.
+
+=item o Add 'use strict' and 'use warnings' to t/*.t
+
+=item o Move t/pod.t to xt/author/
+
+=item o Switch from Test::More to Test::Stream
+
+=item o Remove verbose()
+
+=back
+
+=head2 What's changed in V 1.00 of C<Set::FA::Element>?
 
 =over 4
 
@@ -1320,6 +1375,10 @@ See L<Set::FA/Credit>.
 =head1 See Also
 
 See L<Set::FA/See Also>.
+
+=head1 Repository
+
+L<https://github.com/ronsavage/Set-FA>
 
 =head1 Support
 

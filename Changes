@@ -1,15 +1,19 @@
 Revision history for Perl extension Set::FA.
 
 2.00  2015-02-21T11:23:00
+	- Add github repo https://github.com/ronsavage/Set-FA.
 	- Switch from Hash::FieldHash to Moo. This means no more method chaining.
 	- Switch from Test::More to Test::Stream.
+	- Add repo to Makefile.PL and docs.
+	- Update pre-reqs in Makefie.PL.
 	- Move t/pod.t into xt/author/.
-	- Add github repo https://github.com/ronsavage/Set-FA.
 	- Add Set::FA::Element.maxlevel() and Set::FA::Element.minlevel().
 	- Remove Set::FA::Element.verbose().
 	- Set default logger to Log::Handler. Also, re-write log() so that default messages no longer
-		have the log level prefix.
+		have the prefix of "$level: ".
 	- Add 'use strict;' and 'use warnings;' to t/*.t.
+	- Extract Set::FA's synopsis as scripts/synopsis.1.pl and Set::FA::Element's as
+		scripts/synopsis.2.pl.
 	- Delete Build.PL.
 	- Update MANIFEST.
 	- Update MANIFEST.SKIP.
