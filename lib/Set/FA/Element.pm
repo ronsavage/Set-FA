@@ -33,14 +33,6 @@ has current => # Internal.
 	required => 0,
 );
 
-has data =>
-(
-	default  => sub{return ''},
-	is       => 'rw',
-	isa      => Str,
-	required => 0,
-);
-
 has die_on_loop =>
 (
 	default  => sub{return 0},
@@ -338,51 +330,6 @@ sub build_stt
 	$self -> stt(\%stt);
 
 } # End of build_stt.
-
-# -----------------------------------------------
-
-sub clone
-{
-	my($self) = @_;
-
-	$self -> log(debug => 'Entered clone()');
-
-	my($clone) = _clone($self);
-
-	return bless $clone, ref $self;
-
-} # End of clone.
-
-# -----------------------------------------------
-
-sub _clone
-{
-	my($data) = @_;
-
-	use attributes 'reftype';
-
-	return $data if (! ref $data);
-
-	if (reftype($data) eq 'ARRAY')
-	{
-		return [map{_clone($_)} @$data];
-	}
-	elsif (reftype($data) eq 'HASH')
-	{
-		return {map{$_ => _clone($_)} keys %$data};
-	}
-	elsif (reftype($data) eq 'SCALAR')
-	{
-		my($thing) = _clone($data);
-
-		return \$thing;
-	}
-	else
-	{
-		return $data;
-	}
-
-} # End of _clone.
 
 # -----------------------------------------------
 
@@ -691,8 +638,8 @@ Key-value pairs accepted in the parameter list are as follows. Also, each is als
 so you can retrieve the value and update it at any time.
 
 Naturally, after the internal state transition table has been constructed (during the call to
-new() ), updating some of these fields will be ignored. Methods which I<are> effective later are
-documented.
+C<new()>), updates to some of these fields will be ignored. Methods which I<are> effective later
+are documented.
 
 =over 4
 
@@ -713,7 +660,7 @@ This means you can have only 1 entry function and 1 exit function per state.
 For a module which gives you the power to have a different entry and exit function
 for each different regexp which matches the input, see the (as yet unwritten) Set::FA::Manifold.
 
-Format:
+For a given state name key, the value is a hashref with 1 or 2 of these keys:
 
 =over 4
 
@@ -738,21 +685,12 @@ The point of the [\&fn, 'fn'] version is when you call report(), and the 'fn' st
 =back
 
 Each of these functions is called (in method step_state() ) with the DFA object as the only
-parameter.
+parameter. You use that object to call the methods listed in these docs. See L</Synopsis> for
+a list.
 
 This key is optional.
 
 The default is {}.
-
-=item o data => $string
-
-A place to store anything you want, per DFA.
-
-Retrieve and update the value with the data() method.
-
-This key is optional.
-
-The default is ''.
 
 =item o die_on_loop => $boolean
 
@@ -878,6 +816,18 @@ Returns 1 if the 'current' state - after processing the input - is an accepting 
 
 Returns 0 otherwise.
 
+=head2 accepting($arrayref_of_states)
+
+See L</Using new()> for details.
+
+C<accepting> is a parameter to L</new([%args])>.
+
+=head2 actions($arrayref_of_states)
+
+See L</Using new()> for details.
+
+C<actions> is a parameter to L</new([%args])>.
+
 =head2 advance($input)
 
 Calls L</step($input)> repeatedly on the unconsumed portion of the input.
@@ -928,10 +878,6 @@ you call accepting($new_accepting), actions($new_actions), start($new_start) and
 transtions($new_transitions), for some reason, and then call build_stt(), you will miss out on the
 benefit of calling validate_params(). So don't do that!
 
-=head2 clone()
-
-Returns a deep copy of the L<Set::FA::Element> object.
-
 =head2 current([$state])
 
 Here, the [] indicate an optional parameter.
@@ -948,21 +894,11 @@ Sets the 'current' state of the DFA.
 
 =back
 
-=head2 data([$string])
+=head2 die_on_loop([$Boolean])
 
-Here, the [] indicate an optional parameter.
+See L</Using new()> for details. See also L</advance($input)> for a discussion of C<die_on_loop>.
 
-=over 4
-
-=item o When $string is not provided
-
-Returns the data associated with the object.
-
-=item o When $data is provided
-
-Sets the data associated with the object.
-
-=back
+C<die_on_loop> is a parameter to L</new([%args])>.
 
 =head2 final([$state])
 
@@ -988,17 +924,9 @@ Returns 0 otherwise.
 
 Here, the [] indicate an optional parameter.
 
-=over 4
+See L</Using new()> for details.
 
-=item o When $id is not provided
-
-Returns the id of the object.
-
-=item o When $id is provided
-
-Sets the id of the object.
-
-=back
+C<id> is a parameter to L</new([%args])>.
 
 =head2 log($level, $message)
 
@@ -1006,9 +934,17 @@ Calls log($level, $message) on the logger object if that object is defined.
 
 To stop this, set the logger to '' in the call to L</new([%args])>.
 
+=head2 logger($arrayref_of_states)
+
+See L</Using new()> for details.
+
+C<logger> is a parameter to L</new([%args])>.
+
 =head2 maxlevel([$string])
 
 Here, the [] indicate an optional parameter.
+
+See L</Using new()> for details.
 
 Get or set the value used by the logger object.
 
@@ -1019,11 +955,13 @@ See L<Log::Handler::Levels>.
 
 Typical values are: 'notice', 'info' and 'debug'. The default, 'notice', produces no output.
 
-'maxlevel' is a parameter to L</new()>. See L</Constructor and Initialization> for details.
+C<maxlevel> is a parameter to L</new([%args])>.
 
 =head2 minlevel([$string])
 
 Here, the [] indicate an optional parameter.
+
+See L</Using new()> for details.
 
 Get or set the value used by the logger object.
 
@@ -1032,7 +970,7 @@ created by default. To stop this, set the logger to '' in the call to L</new([%a
 
 See L<Log::Handler::Levels>.
 
-'minlevel' is a parameter to L</new()>. See L</Constructor and Initialization> for details.
+C<minlevel> is a parameter to L</new([%args])>.
 
 =head2 new([%args])
 
@@ -1070,17 +1008,9 @@ Does not reset the id or anything else associated with the object.
 
 Here, the [] indicate an optional parameter.
 
-=over 4
+See L</Using new()> for details.
 
-=item o When $start is not provided
-
-Returns the start state of the object.
-
-=item o When $start is provided
-
-Sets the start state of the object.
-
-=back
+C<start> is a parameter to L</new([%args])>.
 
 =head2 state([$state])
 
@@ -1142,6 +1072,12 @@ If they match, returns 0 immediately.
 =item o Returns 1.
 
 =back
+
+=head2 transitions($arrayref_of_states)
+
+See L</Using new()> for details.
+
+C<transitions> is a parameter to L</new([%args])>.
 
 =head2 validate()
 
@@ -1241,8 +1177,6 @@ This makes it easy to change the quantity of progress reports.
 =item o Add a method, build_stt() to convert new()'s parameters into a state transition table
 
 =item o Add a method, current() to set/get the current state
-
-=item o Add a method, data() to set/get the arbitrary data per object
 
 =item o Add a method, die_on_loop() to set/get the like-named option
 

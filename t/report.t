@@ -41,9 +41,9 @@ Rule => Next state
 /b/ => bar
 /./ => foo
 EOS
-my(@expect)          = split(/\n/, $expect);
-my($stdout, $stderr) = capture{$dfa -> report};
-my(@output)          = split(/\n/, $stdout);
+my(@expect)				= split(/\n/, $expect);
+my($stdout, $stderr)	= capture{$dfa -> report};
+my(@output)				= split(/\n/, $stdout);
 
 ok($output[5] eq $expect[5], 'Reports as expected');
 

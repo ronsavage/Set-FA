@@ -9,18 +9,17 @@ use Test::Stream -V1;
 
 my($dfa) = Set::FA::Element -> new
 (
- accepting   => ['baz'],
- start       => 'foo',
- transitions =>
- [
-  ['foo', 'b', 'bar'],
-  ['foo', '.', 'foo'],
-  ['bar', 'a', 'foo'],
-  ['bar', 'b', 'bar'],
-  ['bar', 'c', 'baz'],
-  ['baz', '.', 'baz'],
- ],
- verbose => 0,
+	accepting	=> ['baz'],
+	start		=> 'foo',
+	transitions	=>
+	[
+		['foo', 'b', 'bar'],
+		['foo', '.', 'foo'],
+		['bar', 'a', 'foo'],
+		['bar', 'b', 'bar'],
+		['bar', 'c', 'baz'],
+		['baz', '.', 'baz'],
+	],
 );
 
 ok($dfa -> isa('Set::FA::Element') == 1, 'Object isa Set::FA::Element');
@@ -61,30 +60,29 @@ ok($dfa -> advance('ac') eq 'foo', 'advance(ac) leads to state foo');
 ok($dfa -> advance('aaaccb') eq 'bar', 'advance(aaaccb) leads to state bar');
 ok($dfa -> advance('acacbcaaba') eq 'baz', 'advance(acacbcaaba) leads to state baz');
 
-my($entry_count) = 0;
-my($exit_count)  = 0;
-$dfa             = Set::FA::Element -> new
+my($entry_count)	= 0;
+my($exit_count)		= 0;
+$dfa				= Set::FA::Element -> new
 (
- accepting => ['baz'],
- actions   =>
- {
-	 bar =>
-	 {
-		 entry => sub { $entry_count++; },
-		 exit  => sub { $exit_count++; }
-	 }
- },
- start       => 'foo',
- transitions =>
- [
-  ['foo', 'b', 'bar'],
-  ['foo', '.', 'foo'],
-  ['bar', 'a', 'foo'],
-  ['bar', 'b', 'bar'],
-  ['bar', 'c', 'baz'],
-  ['baz', '.', 'baz'],
- ],
- verbose => 0,
+	accepting	=> ['baz'],
+	actions		=>
+	{
+		bar =>
+		{
+			entry	=> sub { $entry_count++; },
+			exit	=> sub { $exit_count++; }
+		}
+	},
+	start		=> 'foo',
+	transitions	=>
+	[
+		['foo', 'b', 'bar'],
+		['foo', '.', 'foo'],
+		['bar', 'a', 'foo'],
+		['bar', 'b', 'bar'],
+		['bar', 'c', 'baz'],
+		['baz', '.', 'baz'],
+	],
 );
 
 ok($dfa -> accept('abababa') == 0, 'accept(abababa) does not lead to an acceptor');

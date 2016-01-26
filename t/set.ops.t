@@ -11,52 +11,52 @@ use Test::Stream -V1;
 
 my(@a) = map
 {
-    Set::FA::Element -> new
-		(
-		 accepting   => ['ping'],
-		 id          => "a.$_",
-		 start       => 'ping',
-		 transitions =>
-		 [
-		  ['ping', 'a', 'pong'],
-		  ['ping', '.', 'ping'],
-		  ['pong', 'b', 'ping'],
-		  ['pong', '.', 'pong'],
-		 ],
-		)
+	Set::FA::Element -> new
+	(
+		accepting	=> ['ping'],
+		id			=> "a.$_",
+		start		=> 'ping',
+		transitions	=>
+		[
+			['ping', 'a', 'pong'],
+			['ping', '.', 'ping'],
+			['pong', 'b', 'ping'],
+			['pong', '.', 'pong'],
+		],
+	)
 } (0 .. 2);
 
 my(@b) = map
 {
-    Set::FA::Element -> new
-		(
-		 accepting   => ['pong'],
-		 id          => "b.$_",
-         start       => 'ping',
-		 transitions =>
-		 [
-		  ['ping', 'a', 'pong'],
-		  ['ping', '.', 'ping'],
-		  ['pong', 'b', 'ping'],
-		  ['pong', '.', 'pong'],
-		 ],
-		)
+	Set::FA::Element -> new
+	(
+		accepting	=> ['pong'],
+		id			=> "b.$_",
+		start		=> 'ping',
+		transitions	=>
+		[
+			['ping', 'a', 'pong'],
+			['ping', '.', 'ping'],
+			['pong', 'b', 'ping'],
+			['pong', '.', 'pong'],
+		],
+	)
 } (0 .. 4);
 
 my(@c) = map
 {
-    Set::FA::Element -> new
-		(
-        accepting   => ['happy'],
-        id          => "c.$_",
-        start       => 'sad',
-        transitions =>
-		 [
-		  ['sad',   'dog', 'happy'],
-		  ['sad',   '.',   'sad'  ],
-		  ['happy', '.',   'happy'],
-		 ],
-		)
+	Set::FA::Element -> new
+	(
+		accepting	=> ['happy'],
+		id			=> "c.$_",
+		start		=> 'sad',
+		transitions	=>
+		[
+			['sad',		'dog',	'happy'],
+			['sad',		'.',	'sad'],
+			['happy',	'.',	'happy'],
+		],
+	)
 } (0 .. 6);
 
 my($set);

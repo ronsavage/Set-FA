@@ -233,11 +233,11 @@ documentation.
 
 =head2 Using new()
 
-C<new()> is called as C<< my($set) = Set::FA -> new(@list_of_dfas) >>.
+L</new([@list_of_dfas])> is called as C<< my($set) = Set::FA -> new(@list_of_dfas) >>.
 
 It returns a new object of type C<Set::FA>.
 
-You may supply a list of L<Set::FA::Element> objects to new.
+You may supply a list of L<Set::FA::Element> objects to L</new([@list_of_dfas])>.
 
 If the list is empty, you will need to call $set -> insert(@list_of_dfas) to do anything meaningful
 with $set.
@@ -254,7 +254,7 @@ synopsis.
 Calls L<Set::FA::Element/accept($input)> on all members of the set. This in turn calls
 L<Set::FA::Element/advance($input)> on each member.
 
-Note: This does I<not> mean it calls advance() on the set object.
+Note: This does I<not> mean it calls C<advance()> on the set object.
 
 Returns a L<Set::FA> object containing just the members of the original set which have ended up
 in their respective accepting states.
@@ -286,6 +286,12 @@ match the $id parameter.
 
 Returns a L<Set::FA> object containing just the members of the original set who current
 state matches the $state parameter.
+
+=head2 new([@list_of_dfas])
+
+Here, the [] indicate an optional parameter.
+
+The constructor. See L</Constructor and Initialization>.
 
 =head2 reset()
 
