@@ -37,22 +37,6 @@ sub advance
 
 # -----------------------------------------------
 
-sub clone
-{
-	my($self) = @_;
-	my($set)  = (ref $self) -> new;
-
-	for my $automaton ($self -> members)
-	{
-		$set -> insert($automaton -> clone);
-	}
-
-	return $set;
-
-} # End of clone
-
-# -----------------------------------------------
-
 sub final
 {
 	my($self) = @_;
@@ -264,11 +248,6 @@ in their respective accepting states.
 Calls L<Set::FA::Element/advance($input)> on all members of the set.
 
 Returns nothing.
-
-=head2 clone()
-
-Returns a clone of the set. All references (except for code references) in the
-new set point to newly created objects.
 
 =head2 final()
 

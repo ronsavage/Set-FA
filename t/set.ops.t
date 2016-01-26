@@ -85,18 +85,6 @@ my($sub) = Set::FA -> new(@a, @c);
 
 my($bizzaro_set);
 
-ok( ($bizzaro_set = $set->clone) -> size == $set -> size, 'Cloned size matches');
-
-ok($set -> union($bizzaro_set) -> size == 2*(3+5+7), 'Bizarro size is 2*(3+5+7)');
-ok( ($set + $bizzaro_set) -> size == 2*(3+5+7), 'Set + bizarro size is 2*(3+5+7)');
-ok($set -> union($sub) -> size == 3+5+7, 'Set + sub size is 3+5+7');
-ok( ($set + $sub) -> size == 3+5+7, 'Set + sub size is 3+5+7');
-
-ok($set -> intersection($bizzaro_set) -> size == 0, 'Set does not intersect bizarro');
-ok( ($set * $bizzaro_set) -> size == 0, 'Set does not intersect bizarro');
-ok($set -> intersection($sub) -> size == 3+7, 'Set insersects sub');
-ok( ($set * $sub) -> size == 3+7, 'Set insersects sub');
-
 ok($set->subset($sub) == 0, 'Set is not a subset of sub');
 ok($sub->subset($set) == 1, 'Sub is a subset of itself');
 ok($set -> subset($set) == 1, 'Set is a subset of itself');
