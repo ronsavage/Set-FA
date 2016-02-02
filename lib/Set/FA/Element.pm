@@ -11,98 +11,98 @@ use Types::Standard qw/Any ArrayRef Bool HashRef Str/;
 
 has accepting =>
 (
-	default  => sub{return []},
-	is       => 'rw',
-	isa      => ArrayRef,
-	required => 0,
+	default		=> sub{return []},
+	is			=> 'rw',
+	isa			=> ArrayRef,
+	required	=> 0,
 );
 
 has actions =>
 (
-	default  => sub{return {} },
-	is       => 'rw',
-	isa      => HashRef,
-	required => 0,
+	default		=> sub{return {} },
+	is			=> 'rw',
+	isa			=> HashRef,
+	required	=> 0,
 );
 
 has current => # Internal.
 (
-	default  => sub{return ''},
-	is       => 'rw',
-	isa      => Str,
-	required => 0,
+	default		=> sub{return ''},
+	is			=> 'rw',
+	isa			=> Str,
+	required	=> 0,
 );
 
 has die_on_loop =>
 (
-	default  => sub{return 0},
-	is       => 'rw',
-	isa      => Bool,
-	required => 0,
+	default		=> sub{return 0},
+	is			=> 'rw',
+	isa			=> Bool,
+	required	=> 0,
 );
 
 has id =>
 (
-	default  => sub{return ''},
-	is       => 'rw',
-	isa      => Str,
-	required => 0,
+	default		=> sub{return ''},
+	is			=> 'rw',
+	isa			=> Str,
+	required	=> 0,
 );
 
 has logger =>
 (
-	default  => sub{return undef},
-	is       => 'rw',
-	isa      => Any,
-	required => 0,
+	default		=> sub{return undef},
+	is			=> 'rw',
+	isa			=> Any,
+	required	=> 0,
 );
 
 has match => # Internal.
 (
-	default  => sub{return ''},
-	is       => 'rw',
-	isa      => Str,
-	required => 0,
+	default		=> sub{return ''},
+	is			=> 'rw',
+	isa			=> Str,
+	required	=> 0,
 );
 
 has maxlevel =>
 (
-	default  => sub{return 'notice'},
-	is       => 'rw',
-	isa      => Str,
-	required => 0,
+	default		=> sub{return 'notice'},
+	is			=> 'rw',
+	isa			=> Str,
+	required	=> 0,
 );
 
 has minlevel =>
 (
-	default  => sub{return 'error'},
-	is       => 'rw',
-	isa      => Str,
-	required => 0,
+	default		=> sub{return 'error'},
+	is			=> 'rw',
+	isa			=> Str,
+	required	=> 0,
 );
 
 has start =>
 (
-	default  => sub{return ''},
-	is       => 'rw',
-	isa      => Str,
-	required => 0,
+	default		=> sub{return ''},
+	is			=> 'rw',
+	isa			=> Str,
+	required	=> 0,
 );
 
 has stt => # Internal.
 (
-	default  => sub{return {} },
-	is       => 'rw',
-	isa      => HashRef,
-	required => 0,
+	default		=> sub{return {} },
+	is			=> 'rw',
+	isa			=> HashRef,
+	required	=> 0,
 );
 
 has transitions =>
 (
-	default  => sub{return []},
-	is       => 'rw',
-	isa      => ArrayRef,
-	required => 0,
+	default		=> sub{return []},
+	is			=> 'rw',
+	isa			=> ArrayRef,
+	required	=> 0,
 );
 
 our $VERSION = '2.00';
@@ -120,10 +120,10 @@ sub BUILD
 		(
 			screen =>
 			{
-				maxlevel       => $self -> maxlevel,
-				message_layout => '%m',
-				minlevel       => $self -> minlevel,
-				utf8           => 1,
+				maxlevel		=> $self -> maxlevel,
+				message_layout	=> '%m',
+				minlevel		=> $self -> minlevel,
+				utf8			=> 1,
 			}
 		);
 	}
@@ -178,8 +178,8 @@ sub advance
 
 sub build_stt
 {
-	my($self)   = @_;
-	my(%action) = %{$self -> actions};
+	my($self)	= @_;
+	my(%action)	= %{$self -> actions};
 
 	# Reformat the actions.
 
@@ -200,8 +200,8 @@ sub build_stt
 
 	# Reformat the acceptings.
 
-	my(@accepting) = @{$self -> accepting};
-	my($row)       = 0;
+	my(@accepting)	= @{$self -> accepting};
+	my($row)		= 0;
 
 	my(%accept);
 	my($entry_fn, $entry_name, $exit_fn, $exit_name);
@@ -244,12 +244,12 @@ sub build_stt
 		{
 			# Warning: $regexp must be declared in this scope.
 
-			my($regexp) = qr/($rule)/;
-			$rule_sub   = sub
+			my($regexp)	= qr/^($rule)(.*)/;
+			$rule_sub	= sub
 			{
 				my($class, $input) = @_;
 
-				return $input =~ /^$regexp(.*)/ ? ($1, $2) : (undef, undef);
+				return $input =~ $regexp ? ($1, $2) : (undef, undef);
 			};
 		}
 
@@ -269,8 +269,8 @@ sub build_stt
 
 				if (ref $entry_fn eq 'ARRAY')
 				{
-					$entry_name = $$entry_fn[1];
-					$entry_fn   = $$entry_fn[0];
+					$entry_name	= $$entry_fn[1];
+					$entry_fn	= $$entry_fn[0];
 				}
 				else
 				{
@@ -284,8 +284,8 @@ sub build_stt
 
 				if (ref $exit_fn eq 'ARRAY')
 				{
-					$exit_name = $$exit_fn[1];
-					$exit_fn   = $$exit_fn[0];
+					$exit_name	= $$exit_fn[1];
+					$exit_fn	= $$exit_fn[0];
 				}
 				else
 				{
@@ -295,13 +295,13 @@ sub build_stt
 
 			$stt{$state} =
 			{
-				accept     => $accept{$state} || 0,
-				entry_fn   => $entry_fn,
-				entry_name => $entry_name,
-				exit_fn    => $exit_fn,
-				exit_name  => $exit_name,
-				rule   => [ [$rule_sub, $next, $rule] ],
-				start  => 0,
+				accept		=> $accept{$state} || 0,
+				entry_fn	=> $entry_fn,
+				entry_name	=> $entry_name,
+				exit_fn		=> $exit_fn,
+				exit_name	=> $exit_name,
+				rule		=> [ [$rule_sub, $next, $rule] ],
+				start		=> 0,
 			};
 		}
 
@@ -437,8 +437,8 @@ sub step
 
 	$self -> log(debug => 'Entered step()');
 
-	my($current) = $self -> current;
-	my($stt)     = $self -> stt;
+	my($current)	= $self -> current;
+	my($stt)		= $self -> stt;
 
 	my($match);
 	my($next);
@@ -447,8 +447,8 @@ sub step
 
 	for my $item (@{$$stt{$current}{rule} })
 	{
-		($rule_sub, $next, $rule) = @$item;
-		($match, $output)         = $rule_sub -> ($self, $input);
+		($rule_sub, $next, $rule)	= @$item;
+		($match, $output)			= $rule_sub -> ($self, $input);
 
 		if (defined $match)
 		{
