@@ -1107,7 +1107,7 @@ Use L<Capture::Tiny>. See t/report.t for a simple example.
 
 See L</Repository> below.
 
-=item o Switch from Hash::FieldHash to Moo
+=item o Switch to Moo
 
 =item o This means method chaining is no longer supported
 
