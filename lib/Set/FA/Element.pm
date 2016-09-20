@@ -1133,7 +1133,7 @@ See scripts/synopsis.*.pl.
 
 =head2 What's changed in V 1.00 of C<Set::FA::Element>?
 
-Note: I don't use Hash::FieldHash, Log::Agent or Moose any more.
+Note: I have switched to Moo and Log::Handler.
 
 =over 4
 
