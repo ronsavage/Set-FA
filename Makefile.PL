@@ -29,13 +29,14 @@ my(%params) =
 	PL_FILES  => {},
 	PREREQ_PM =>
 	{
-		'Capture::Tiny'	=> 0.44,
-		'Log::Handler'	=> 0.88,
-		'Moo'			=> 2.002004,
-		'parent'		=> 0.234,
-		'Set::Object'	=> 1.35,
-		'strict'		=> 0,
-		'warnings'		=> 0,
+		'Capture::Tiny'		=> 0.44,
+		'Log::Handler'		=> 0.88,
+		'Moo'				=> 2.002004,
+		'parent'			=> 0.234,
+		'Set::Object'		=> 1.35,
+		'strict'			=> 0,
+		'Types::Standard'	=> 1.000005,
+		'warnings'			=> 0,
 	},
 	TEST_REQUIRES =>
 	{
