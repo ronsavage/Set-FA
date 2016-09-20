@@ -1,5 +1,14 @@
 Revision history for Perl extension Set::FA.
 
+2.01  2016-09-20T12:29:00
+	- Stop using Test::Stream. Use Test::More shipped in the Test::Simple distro.
+	- Adopt new repo structure. For details, see
+		http://savage.net.au/Ron/html/My.Workflow.for.Building.Distros.html.
+		This involves changing the licence from Artistic to Perl.
+	- Update .gitignore and MANIFEST.SKIP.
+	- Move various modules to TEST_REQUIRES within Makefile.PL.
+	- Update version #s in pre-reqs.
+
 2.00  2015-02-21T11:23:00
 	- Add github repo https://github.com/ronsavage/Set-FA.
 	- Switch from Hash::FieldHash to Moo. This means no more method chaining.

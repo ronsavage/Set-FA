@@ -1,3 +1,5 @@
+#!/usr/bin/env Perl
+
 use strict;
 use warnings;
 
@@ -5,7 +7,7 @@ use Capture::Tiny 'capture';
 
 use Set::FA::Element;
 
-use Test::Stream -V1;
+use Test::More;
 
 # --------------------------------------
 

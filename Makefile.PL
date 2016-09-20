@@ -26,27 +26,28 @@ my(%params) =
 	},
 	DISTNAME  => 'Set-FA',
 	NAME      => 'Set::FA',
-	LICENSE   => 'artistic_2',
 	PL_FILES  => {},
 	PREREQ_PM =>
 	{
-		'Capture::Tiny'	=> 0.30,
-		'Log::Handler'	=> 0.84,
-		'Moo'			=> 2.000002,
+		'Capture::Tiny'	=> 0.44,
+		'Log::Handler'	=> 0.88,
+		'Moo'			=> 2.002004,
 		'parent'		=> 0.234,
 		'Set::Object'	=> 1.35,
 		'strict'		=> 0,
-		'Test::More'	=> 1.001014,
-		'Test::Pod'		=> 1.48,
-		'Test::Stream'	=> 1.302026,
 		'warnings'		=> 0,
+	},
+	TEST_REQUIRES =>
+	{
+		'Test::Pod'		=> 1.51,
+		'Test::More'	=> 1.302056,
 	},
 	VERSION_FROM => 'lib/Set/FA.pm',
 );
 
 if ( ($ExtUtils::MakeMaker::VERSION =~ /^\d\.\d\d$/) && ($ExtUtils::MakeMaker::VERSION > 6.30) )
 {
-	$params{LICENSE} = 'artistic_2';
+	$params{LICENSE} = 'perl';
 }
 
 if ($ExtUtils::MakeMaker::VERSION ge '6.46')
@@ -55,13 +56,16 @@ if ($ExtUtils::MakeMaker::VERSION ge '6.46')
 	{
 		'meta-spec' =>
 		{
-		'version' => 2,
+			version => 2,
 		},
 		resources   =>
 		{
-			'bugtracker' => 'https://rt.cpan.org/Public/Dist/Display.html?Name=Set-FA',
-			'license' => 'http://opensource.org/licenses/Artistic-2.0',
-			repository =>
+			bugtracker =>
+			{
+				web => 'https://rt.cpan.org/Public/Dist/Display.html?Name=Set-FA',
+			},
+			license		=> 'http://dev.perl.org/licenses/',
+			repository	=>
 			{
 				'type' => 'git',
 				'url' => 'https://github.com/ronsavage/Set-FA.git',
