@@ -1137,7 +1137,7 @@ Note: I have switched to Moo and Log::Handler.
 
 =over 4
 
-=item o Use Hash::FieldHash for getters and setters
+=item o Use Moo for getters and setters
 
 Originally, L<Set::FA::Element> used direct hash access to implement the logic.
 I did not want to do that. At the same time, I did not want users to incur the overhead
