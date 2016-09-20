@@ -1143,8 +1143,7 @@ Originally, L<Set::FA::Element> used direct hash access to implement the logic.
 I did not want to do that. At the same time, I did not want users to incur the overhead
 of L<Moose>.
 
-So, I've adopted my standard policy of using L<Hash::FieldHash> in stand-alone modules and
-L<Moose> in apps.
+So, I've adopted my standard policy of using L<Moo>.
 
 =item o Rename the new() parameter from accept to accepting
 
