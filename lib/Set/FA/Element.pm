@@ -526,7 +526,7 @@ sub validate_params
 
 =head1 NAME
 
-L<Set::FA::Element> - Discrete Finite Automaton
+Set::FA::Element - Discrete Finite Automaton
 
 =head1 Synopsis
 
